@@ -3,316 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookie Guardian - Auto Delete Cookies | Privacy Extension</title>
-    <meta name="description" content="Cookie Guardian automatically deletes cookies when you close browser tabs. A Manifest V3 replacement for Cookie AutoDelete.">
-    <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/sPMeDJQOb1vRwI3rVKUmvhVDPBT4wJfbKVNlb6HFbWlQPqaJM_LJ9QV5nE2xPcPVQS7TZFqLzxRXBWBqrBwPqJkY7w=s60">
+    <title>Cookie Guardian - Auto Delete Cookies</title>
+    <meta name="description" content="Cookie Guardian automatically deletes cookies when you close browser tabs. A modern Manifest V3 privacy extension. Whitelist sites you trust.">
+    <meta name="keywords" content="cookie auto delete, delete cookies, privacy extension, chrome extension, manifest v3, cookie manager">
+    <link rel="icon" type="image/png" href="icons/icon48.png">
     <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-hover: #7c3aed;
+            --success: #4ade80;
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --text: #e4e4e7;
+            --text-muted: #a1a1aa;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #1f2937;
-            background: #f9fafb;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #0f0f23 100%);
+            min-height: 100vh;
         }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-        }
-        
-        .hero-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        
-        .tagline {
-            font-size: 1.25rem;
-            opacity: 0.9;
-            margin-bottom: 30px;
-        }
-        
-        .cta {
-            display: inline-block;
-            background: white;
-            color: #1e40af;
-            padding: 16px 32px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-        }
-        
-        .cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-        }
-        
-        .badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-top: 20px;
-        }
-        
-        /* Main Content */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-        
-        /* Alert Banner */
-        .alert {
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 50px;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-        
-        .alert-icon { font-size: 1.5rem; }
-        .alert h3 { color: #92400e; margin-bottom: 5px; }
-        .alert p { color: #78350f; font-size: 0.95rem; }
-        
-        /* Feature Grid */
-        .section-title {
-            font-size: 1.75rem;
-            color: #1e40af;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 60px;
-        }
-        
-        .feature {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 12px;
-        }
-        
-        .feature h3 {
-            color: #1f2937;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-        
-        .feature p {
-            color: #6b7280;
-            font-size: 0.95rem;
-        }
-        
-        /* Premium Section */
-        .premium {
-            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
-            border-radius: 16px;
-            padding: 40px;
-            color: white;
-            margin-bottom: 60px;
-            text-align: center;
-        }
-        
-        .premium h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .price-note {
-            opacity: 0.8;
-            margin-bottom: 25px;
-        }
-        
-        .premium-features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .premium-feature {
-            background: rgba(255,255,255,0.15);
-            padding: 10px 18px;
-            border-radius: 25px;
-            font-size: 0.95rem;
-        }
-        
-        /* Privacy Section */
-        .privacy-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 60px;
-        }
-        
-        .privacy-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        .privacy-item span:first-child {
-            font-size: 1.25rem;
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            background: #1f2937;
-            color: #9ca3af;
-        }
-        
-        .footer-links {
-            margin-bottom: 15px;
-        }
-        
-        .footer-links a {
-            color: #60a5fa;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-        
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            .hero { padding: 50px 20px; }
-            .premium { padding: 30px 20px; }
-        }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        .hero { text-align: center; padding: 60px 0; }
+        .hero-icon { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 24px; box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3); }
+        h1 { font-size: 3em; background: linear-gradient(135deg, var(--primary), var(--success)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
+        .tagline { font-size: 1.3em; color: var(--text-muted); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .cta { display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; border-radius: 12px; font-weight: 600; font-size: 1.1em; text-decoration: none; transition: all 0.2s ease; }
+        .cta-primary { background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: white; box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4); }
+        .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(139, 92, 246, 0.5); }
+        .cta-secondary { background: var(--bg-card); color: var(--text); border: 1px solid rgba(139, 92, 246, 0.3); }
+        .cta-secondary:hover { border-color: var(--primary); background: rgba(139, 92, 246, 0.1); }
+        section { margin: 60px 0; }
+        h2 { font-size: 1.8em; color: var(--primary); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+        h2::before { content: ''; width: 4px; height: 28px; background: linear-gradient(to bottom, var(--primary), var(--success)); border-radius: 2px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .feature-card { background: var(--bg-card); border-radius: 16px; padding: 24px; border: 1px solid rgba(139, 92, 246, 0.1); transition: all 0.2s ease; }
+        .feature-card:hover { border-color: rgba(139, 92, 246, 0.3); transform: translateY(-4px); }
+        .feature-card h3 { color: var(--success); margin-bottom: 8px; font-size: 1.1em; }
+        .feature-card p { color: var(--text-muted); font-size: 0.95em; }
+        .why-content { background: var(--bg-card); border-radius: 16px; padding: 32px; border-left: 4px solid var(--primary); }
+        .why-content p { color: var(--text-muted); margin-bottom: 16px; }
+        .why-content p:last-child { margin-bottom: 0; }
+        .premium-card { background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(74, 222, 128, 0.1)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 16px; padding: 32px; }
+        .premium-price { font-size: 2em; font-weight: bold; color: var(--success); margin-bottom: 8px; }
+        .premium-note { color: var(--text-muted); font-size: 0.9em; margin-bottom: 20px; }
+        .premium-features { list-style: none; }
+        .premium-features li { padding: 8px 0; color: var(--text); display: flex; align-items: center; gap: 12px; }
+        .premium-features li::before { content: '✓'; color: var(--success); font-weight: bold; }
+        .privacy-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+        .privacy-list li { display: flex; align-items: center; gap: 10px; color: var(--text-muted); }
+        .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid rgba(139, 92, 246, 0.2); text-align: center; color: var(--text-muted); }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+        .footer-links a { color: var(--primary); text-decoration: none; }
+        .footer-links a:hover { text-decoration: underline; }
+        .browser-badges { display: flex; justify-content: center; gap: 16px; margin-top: 24px; flex-wrap: wrap; }
+        .badge { background: var(--bg-card); padding: 8px 16px; border-radius: 8px; font-size: 0.9em; color: var(--text-muted); }
+        @media (max-width: 600px) { h1 { font-size: 2.2em; } .tagline { font-size: 1.1em; } .cta { padding: 14px 24px; font-size: 1em; } .hero { padding: 40px 0; } }
     </style>
 </head>
 <body>
-    <section class="hero">
-        <div class="hero-content">
-            <div class="logo">🍪🛡️</div>
-            <h1>Cookie Guardian</h1>
-            <p class="tagline">Automatically delete cookies when you close tabs.<br>Privacy without thinking about it.</p>
-            <a href="https://chromewebstore.google.com/detail/cookie-guardian-auto-dele/gnoaanpbfnjakaddkecnnamnfkebhgle" class="cta">
-                ⬇️ Install Free from Chrome Web Store
-            </a>
-            <div class="badge">✅ Manifest V3 • Won't Get Disabled</div>
-        </div>
-    </section>
-    
     <div class="container">
-        <div class="alert">
-            <span class="alert-icon">⚠️</span>
-            <div>
-                <h3>Cookie AutoDelete is Dead</h3>
-                <p>Chrome disabled Cookie AutoDelete in December 2024, leaving 100,000+ users without protection. Cookie Guardian is built from scratch for Manifest V3 — it's here to stay.</p>
+        <header class="hero">
+            <img src="icons/icon128.png" alt="Cookie Guardian" class="hero-icon">
+            <h1>Cookie Guardian</h1>
+            <p class="tagline">Automatically delete cookies when you close browser tabs. Privacy without thinking about it.</p>
+            <div class="cta-buttons">
+                <a href="https://chromewebstore.google.com/detail/cookie-guardian-auto-dele/gnoaanpbfnjakaddkecnnamnfkebhgle" class="cta cta-primary">Install for Chrome</a>
+                <a href="https://github.com/ethancarlton-cyber/cookie-guardian" class="cta cta-secondary">View on GitHub</a>
             </div>
-        </div>
-        
-        <h2 class="section-title">Features</h2>
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">🗑️</div>
-                <h3>Auto-Delete on Tab Close</h3>
-                <p>Cookies are automatically removed when you close a tab. No manual cleanup needed.</p>
+            <div class="browser-badges">
+                <span class="badge">Chrome</span>
+                <span class="badge">Brave</span>
+                <span class="badge">Edge</span>
+                <span class="badge">Opera</span>
+                <span class="badge">Vivaldi</span>
             </div>
-            <div class="feature">
-                <div class="feature-icon">✅</div>
-                <h3>Smart Whitelist</h3>
-                <p>Keep cookies for sites you trust — banks, email, social media. Stay logged in where it matters.</p>
+        </header>
+        <section>
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card"><h3>Auto-Delete on Tab Close</h3><p>Cookies are automatically removed the moment you close a tab. No manual cleanup needed.</p></div>
+                <div class="feature-card"><h3>Whitelist Protection</h3><p>Keep cookies for sites you trust - banks, email, social media. One click to protect.</p></div>
+                <div class="feature-card"><h3>Deletion Log</h3><p>See exactly which cookies were deleted with timestamps. Full transparency.</p></div>
+                <div class="feature-card"><h3>Daily Statistics</h3><p>Track how many tracking cookies you've blocked with visual charts.</p></div>
+                <div class="feature-card"><h3>Right-Click Whitelist</h3><p>Right-click any page to instantly add it to your whitelist.</p></div>
+                <div class="feature-card"><h3>Keyboard Shortcuts</h3><p>Alt+Shift+C to toggle, Alt+Shift+W to whitelist, Alt+Shift+X to clean.</p></div>
             </div>
-            <div class="feature">
-                <div class="feature-icon">🌐</div>
-                <h3>Works Everywhere</h3>
-                <p>Protects you on every website automatically. No rules or configuration needed.</p>
+        </section>
+        <section>
+            <h2>Why Cookie Guardian?</h2>
+            <div class="why-content">
+                <p><strong>Cookie AutoDelete was disabled by Chrome in December 2024</strong>, leaving 100,000+ users without a working alternative. Many "replacements" are buggy, abandoned, or don't actually delete cookies.</p>
+                <p>Cookie Guardian is <strong>built from the ground up for Manifest V3</strong>. It won't get disabled. It actually works. And it's actively maintained with regular updates.</p>
+                <p>We've fixed the bugs others haven't - cookies reliably delete when tabs close, statistics track correctly across browser restarts, and your whitelist is always respected.</p>
             </div>
-            <div class="feature">
-                <div class="feature-icon">📊</div>
-                <h3>Daily Stats</h3>
-                <p>Badge counter shows how many cookies you've blocked. Weekly summary notifications.</p>
+        </section>
+        <section>
+            <h2>Premium</h2>
+            <div class="premium-card">
+                <div class="premium-price">$2</div>
+                <div class="premium-note">One-time payment. No subscription.</div>
+                <ul class="premium-features">
+                    <li>Unlimited whitelist slots (free version: 10)</li>
+                    <li>Clean localStorage on tab close</li>
+                    <li>Clean IndexedDB on tab close</li>
+                    <li>Clean cache on tab close</li>
+                    <li>Support continued development</li>
+                </ul>
             </div>
-            <div class="feature">
-                <div class="feature-icon">🎨</div>
-                <h3>Light & Dark Themes</h3>
-                <p>Matches your system preference or choose manually. Easy on the eyes.</p>
+        </section>
+        <section>
+            <h2>Privacy First</h2>
+            <ul class="privacy-list">
+                <li>No tracking or telemetry</li>
+                <li>No external servers</li>
+                <li>No account required</li>
+                <li>All data stored locally</li>
+                <li>Open source code</li>
+                <li>Minimal permissions</li>
+            </ul>
+        </section>
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="PRIVACY.html">Privacy Policy</a>
+                <a href="https://github.com/ethancarlton-cyber/cookie-guardian">GitHub</a>
+                <a href="https://chromewebstore.google.com/detail/cookie-guardian-auto-dele/gnoaanpbfnjakaddkecnnamnfkebhgle">Chrome Web Store</a>
             </div>
-            <div class="feature">
-                <div class="feature-icon">⚡</div>
-                <h3>Lightweight</h3>
-                <p>Minimal resource usage. Won't slow down your browser.</p>
-            </div>
-        </div>
-        
-        <div class="premium">
-            <h2>🚀 Premium</h2>
-            <div class="price">£2</div>
-            <p class="price-note">One-time payment • Lifetime access</p>
-            <div class="premium-features">
-                <span class="premium-feature">♾️ Unlimited whitelist</span>
-                <span class="premium-feature">🧹 Clear localStorage</span>
-                <span class="premium-feature">🗄️ Clear IndexedDB</span>
-                <span class="premium-feature">💨 Clear cache</span>
-            </div>
-            <p style="opacity: 0.8; font-size: 0.9rem;">Free version works great • Premium adds deep cleaning</p>
-        </div>
-        
-        <h2 class="section-title">Privacy First</h2>
-        <div class="privacy-grid">
-            <div class="privacy-item"><span>🚫</span> No tracking or telemetry</div>
-            <div class="privacy-item"><span>🏠</span> All data stored locally</div>
-            <div class="privacy-item"><span>👤</span> No account required</div>
-            <div class="privacy-item"><span>🔒</span> No external servers</div>
-            <div class="privacy-item"><span>📖</span> Open source code</div>
-            <div class="privacy-item"><span>💳</span> Secure payments only</div>
-        </div>
+            <p>Cookie Guardian is open source under the MIT License.</p>
+        </footer>
     </div>
-    
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="PRIVACY.html">Privacy Policy</a>
-            <a href="https://github.com/curlyethan/cookie-guardian">GitHub</a>
-            <a href="https://chromewebstore.google.com/detail/cookie-guardian-auto-dele/gnoaanpbfnjakaddkecnnamnfkebhgle">Chrome Web Store</a>
-        </div>
-        <p>Cookie Guardian is open source under the MIT License.</p>
-    </footer>
 </body>
 </html>
