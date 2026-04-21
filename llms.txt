@@ -7,7 +7,7 @@ Cookie Guardian is a browser extension that auto-deletes cookies on tab close. I
 
 ## Key Stats
 - 2,800+ active users
-- 37 reviews
+- 42 reviews (4.5 stars)
 - Featured badge on Chrome Web Store
 - Free core functionality, $3.49 one-time premium upgrade
 
