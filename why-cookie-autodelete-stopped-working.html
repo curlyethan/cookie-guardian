@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Cookie AutoDelete stopped working — and where its 100,000+ users went | Cookie Guardian</title>
+    <meta name="description" content="In late 2024, Chrome disabled Cookie AutoDelete along with every other Manifest V2 extension. Here's the technical reason it couldn't migrate, the maintainer's perspective, and where its users ended up.">
+    <meta name="keywords" content="why cookie autodelete not working, what happened to cookie autodelete, manifest v3 cookie extensions, mv2 deprecation, cookie autodelete dead, mv3 migration">
+    <meta property="og:title" content="Why Cookie AutoDelete stopped working">
+    <meta property="og:description" content="The Manifest V2 deprecation, the migration that didn't happen, and what the 100K stranded users did next.">
+    <meta property="og:url" content="https://curlyethan.github.io/cookie-guardian/why-cookie-autodelete-stopped-working.html">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://curlyethan.github.io/cookie-guardian/icons/icon128.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Why Cookie AutoDelete stopped working">
+    <meta name="twitter:description" content="The Manifest V2 deprecation, the migration that didn't happen, and what the 100K stranded users did next.">
+    <meta name="twitter:image" content="https://curlyethan.github.io/cookie-guardian/icons/icon128.png">
+    <link rel="canonical" href="https://curlyethan.github.io/cookie-guardian/why-cookie-autodelete-stopped-working.html">
+    <link rel="icon" type="image/png" href="icons/icon48.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00BFA6;
+            --primary-hover: #00897B;
+            --accent: #FF9100;
+            --accent-hover: #E67E00;
+            --success: #00E676;
+            --bg-dark: #1A1A2E;
+            --bg-card: #16213e;
+            --text: #e4e4e7;
+            --text-muted: #a1a1aa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #0f0f23 100%);
+            min-height: 100vh;
+        }
+
+        a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+            outline: 3px solid #FF9100;
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                transform: none !important;
+            }
+        }
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            background: var(--accent);
+            color: #0a0a15;
+            padding: 12px 20px;
+            font-weight: 700;
+            z-index: 999;
+        }
+        .skip-link:focus { left: 12px; top: 12px; }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .top-nav {
+            margin-bottom: 24px;
+            font-size: 0.9em;
+        }
+        .top-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+        .top-nav a:hover { color: var(--primary); }
+
+        .hero { padding: 40px 0 20px; }
+
+        h1 {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 2.4em;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 18px;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1em;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+
+        .hero-subtitle strong { color: var(--text); }
+        .hero-subtitle em { color: var(--text); font-style: italic; }
+        .hero-subtitle a { color: var(--primary); text-decoration: none; }
+        .hero-subtitle a:hover { text-decoration: underline; }
+
+        .updated-stamp {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+        .updated-stamp time { color: var(--primary); }
+
+        section { margin: 48px 0; }
+
+        h2 {
+            font-size: 1.7em;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            line-height: 1.3;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 26px;
+            background: linear-gradient(to bottom, var(--primary), var(--success));
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        h3 {
+            color: var(--success);
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            margin-top: 24px;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        section p strong { color: var(--text); }
+        section p em { color: var(--text); font-style: italic; }
+
+        a { color: var(--primary); }
+
+        ul.timeline {
+            list-style: none;
+            padding-left: 0;
+            margin: 18px 0;
+        }
+        ul.timeline li {
+            color: var(--text-muted);
+            padding: 10px 0 10px 28px;
+            border-left: 2px solid rgba(0, 191, 166, 0.25);
+            margin-left: 6px;
+            position: relative;
+        }
+        ul.timeline li::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 16px;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px var(--bg-dark);
+        }
+        ul.timeline li strong { color: var(--text); }
+        ul.timeline li.approx::before { background: var(--accent); }
+
+        ul.bullets {
+            color: var(--text-muted);
+            padding-left: 22px;
+            margin: 12px 0 18px;
+        }
+        ul.bullets li {
+            margin-bottom: 10px;
+            padding-left: 4px;
+        }
+        ul.bullets li strong { color: var(--text); }
+
+        pre {
+            background: #0d1117;
+            border: 1px solid rgba(0, 191, 166, 0.18);
+            border-radius: 10px;
+            padding: 16px 18px;
+            overflow-x: auto;
+            font-size: 0.9em;
+            line-height: 1.55;
+            margin: 14px 0 18px;
+        }
+        pre code {
+            color: #d4d4d8;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background: transparent;
+            padding: 0;
+        }
+        code {
+            background: rgba(0, 191, 166, 0.1);
+            color: #66e6d0;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.92em;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--accent);
+            background: rgba(255, 145, 0, 0.05);
+            padding: 14px 18px;
+            margin: 16px 0;
+            color: var(--text);
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+        blockquote cite {
+            display: block;
+            color: var(--text-muted);
+            font-style: normal;
+            font-size: 0.88em;
+            margin-top: 8px;
+        }
+
+        .callout {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px 24px;
+            border-left: 3px solid rgba(0, 191, 166, 0.4);
+            margin: 24px 0;
+        }
+        .callout p:last-child { margin-bottom: 0; }
+
+        ul.sources { list-style: none; padding-left: 0; }
+        ul.sources li {
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            padding-left: 18px;
+            position: relative;
+        }
+        ul.sources li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        ul.sources a { text-decoration: none; }
+        ul.sources a:hover { text-decoration: underline; }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(0, 191, 166, 0.2);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 12px; flex-wrap: wrap; }
+        .footer-links a { color: var(--primary); text-decoration: none; }
+        .footer-links a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.7em; letter-spacing: -0.5px; }
+            .hero-subtitle { font-size: 1em; }
+            h2 { font-size: 1.35em; }
+            pre { font-size: 0.82em; padding: 12px 14px; }
+            .callout { padding: 16px 18px; }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Why Cookie AutoDelete stopped working — and where its 100,000+ users went",
+        "datePublished": "2026-05-08",
+        "dateModified": "2026-05-08",
+        "author": {"@type": "Person", "name": "Ethan Carlton"},
+        "publisher": {"@type": "Organization", "name": "Cookie Guardian", "logo": {"@type": "ImageObject", "url": "https://curlyethan.github.io/cookie-guardian/icons/icon128.png"}},
+        "image": "https://curlyethan.github.io/cookie-guardian/icons/icon128.png",
+        "mainEntityOfPage": "https://curlyethan.github.io/cookie-guardian/why-cookie-autodelete-stopped-working.html",
+        "wordCount": "1853",
+        "about": {"@type": "Thing", "name": "Manifest V3"},
+        "keywords": "Manifest V3, Cookie AutoDelete, browser extensions, MV3 migration, Chrome extensions, MV2 deprecation"
+    }
+    </script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div class="container">
+        <nav class="top-nav"><a href="/cookie-guardian/">← Cookie Guardian home</a></nav>
+
+        <main id="main">
+        <header class="hero" style="padding: 40px 0 20px;">
+            <h1>Why Cookie AutoDelete stopped working — and where its 100,000+ users went</h1>
+            <p class="hero-subtitle">In late 2024, every Cookie AutoDelete user got the same Chrome warning: <em>"This extension is no longer supported."</em> Days later, the icon was gone. Here's what actually happened, why the maintainer didn't migrate it, and what came next.</p>
+            <p class="updated-stamp"><time datetime="2026-05-08">Last updated: 8 May 2026</time></p>
+        </header>
+
+        <section>
+            <h2>What happened — the timeline</h2>
+            <p>The end of Cookie AutoDelete (CAD) on Chrome wasn't sudden. It was the end-state of a six-year platform transition that the Chromium team had been signposting since 2018. Here's the sequence, anchored to the events that mattered for end users:</p>
+            <ul class="timeline">
+                <li><strong>2018</strong> — Chromium team publishes initial Manifest V3 design proposals, beginning a multi-year discussion with extension developers about the new platform's blocking-API restrictions.</li>
+                <li><strong>December 2022</strong> — Cookie AutoDelete ships its last release: <strong>v3.8.2</strong>. After this point, the project enters maintenance limbo, with infrastructure-only commits but no shipped feature work. <span class="approx">(verified via the project's GitHub release page)</span></li>
+                <li><strong>2023</strong> — Google formally re-publishes the MV2 deprecation timeline after several delays, naming concrete dates for enforcement.</li>
+                <li><strong>June 2024</strong> — Chrome stops accepting new MV2 extension submissions in the Chrome Web Store. Updates to existing MV2 listings are restricted.</li>
+                <li><strong>Late 2024</strong> — Chrome begins disabling MV2 extensions for users on the Stable channel in waves. CAD users start seeing <em>"this extension is no longer supported"</em> notices and the toolbar icon greys out.</li>
+                <li><strong>Through 2025</strong> — The CAD GitHub repository sees occasional dependency-bump commits (last activity: April 2025) but no MV3 rewrite. The community-fork project <code>median-dxz/Cookie-AutoDelete-MV3</code> publishes early MV3 builds outside the Chrome Web Store.</li>
+            </ul>
+            <p>If you're reading this and your CAD icon is still working, you're almost certainly on Firefox — Mozilla retained MV2 support past Chrome's cutoff, and the Firefox add-on listing for CAD continues to function on that browser as of writing.</p>
+        </section>
+
+        <section>
+            <h2>What Manifest V3 actually changed (technically)</h2>
+            <p>To understand why Cookie AutoDelete couldn't simply ship an "MV3 update," it helps to see what MV3 actually changed under the hood. Four shifts mattered the most for cookie-management extensions:</p>
+
+            <h3>1. The death of blocking <code>webRequest</code></h3>
+            <p>In Manifest V2, an extension could intercept any network request, inspect it, and synchronously block or modify it:</p>
+            <pre><code>// MV2 — persistent background page
+chrome.webRequest.onBeforeRequest.addListener(
+  callback,
+  { urls: ['&lt;all_urls&gt;'] },
+  ['blocking']
+);</code></pre>
+            <p>In MV3, the <code>'blocking'</code> mode of <code>onBeforeRequest</code> is unavailable to non-enterprise extensions. The replacement is <code>declarativeNetRequest</code> — instead of running JavaScript on every request, the extension pre-declares static rule sets that the browser evaluates internally. There is a hard ceiling: roughly <strong>30,000 dynamic rules per extension</strong>, plus stricter ceilings on session rules. For an extension that needs per-tab cookie tracking with millions of possible domain combinations, that limit is unworkable without a redesign.</p>
+
+            <h3>2. Service workers replace persistent background pages</h3>
+            <p>MV2 extensions could run a persistent background page that lived for as long as the browser was open. CAD used this to hold an in-memory map of which domains had which cookies in which tabs — a lookup table that needed to survive across page navigations and tab events.</p>
+            <p>MV3 replaces this with a <strong>service worker</strong>: the extension's background script runs only when needed and is terminated by Chrome after roughly 30 seconds of inactivity. State that used to live in memory now has to be persisted to <code>chrome.storage.session</code> (volatile across browser restarts) or <code>chrome.storage.local</code> (slower, with quotas), and re-hydrated on every wake. Architecturally this is closer to a stateless function than a long-running daemon.</p>
+
+            <h3>3. Stricter content security policy</h3>
+            <p>MV3 forbids remotely-hosted code, inline event handlers, and <code>eval()</code> in extension contexts. For most cookie tools this is a non-issue — but extensions that bundled older libraries or used dynamic code generation needed cleanup before they could even load under MV3.</p>
+
+            <h3>4. Promises everywhere</h3>
+            <p>Most callback-style Chrome APIs were re-issued as Promise-returning equivalents, and several MV2 callback patterns were deprecated. Existing MV2 codebases work, but a clean MV3 rewrite typically modernises the entire async surface — another non-trivial chunk of work.</p>
+
+            <p>None of these changes individually killed cookie-management extensions. The combination did. CAD's architecture relied on a persistent background page tracking tab state across long sessions — and that pattern simply does not exist in MV3. A migration was a redesign, not a port.</p>
+
+            <h3>Why this hits cookie tools harder than ad blockers</h3>
+            <p>It's worth being precise about why cookie-management extensions specifically struggled with MV3, because the most-cited MV3 casualty narrative is the ad-blocker one. Ad blockers and cookie cleaners look superficially similar — both intercept site behaviour for privacy reasons — but the architectural mismatch with MV3 is different in each case.</p>
+            <p>Ad blockers fight a rule-count battle: <code>declarativeNetRequest</code>'s 30,000-rule ceiling is a constraint relative to community block lists that ship hundreds of thousands of rules. The fight is over <em>how many</em> rules an extension can declare. Cookie auto-deleters, by contrast, fight a state-tracking battle: there isn't really a "rule" for "delete the cookies for example.com when the last tab pointing at example.com closes." That's an event-driven, stateful operation that needs to know which tabs exist, which domains they belong to, and when a tab-close event leaves zero remaining tabs for a given domain. Persistent in-memory state was the natural way to do that under MV2; under MV3 it has to be reconstructed from <code>chrome.storage</code> on every service-worker wake-up, with all the latency and quota tradeoffs that implies.</p>
+        </section>
+
+        <section>
+            <h2>Why CAD specifically couldn't migrate</h2>
+            <p>Several MV2 extensions <em>did</em> ship MV3 versions. uBlock Origin Lite — Raymond Hill's MV3-compatible cousin to uBlock Origin — was published in 2022 and continues to ship. AdGuard, 1Password, LastPass, and Bitwarden all migrated. So why not CAD?</p>
+            <p>Three structural reasons, drawn from the project's own GitHub history:</p>
+            <ul class="bullets">
+                <li><strong>Volunteer maintainer bandwidth.</strong> CAD was led primarily by a single GitHub user (<a href="https://github.com/kennethtran93">kennethtran93</a>) with help from a small handful of contributors. Public commit activity tapered through 2023 and continued tapering through 2024, with the most recent commits in 2025 being dependency bumps from Dependabot rather than feature work.</li>
+                <li><strong>The MV3 migration was a redesign, not a port.</strong> CAD's persistent-background-page architecture mapped poorly onto service workers. Greylist expiry timers, per-tab cookie tracking, and the "cleanup on tab close" event handler each needed re-thinking, not re-typing. Estimated effort in community discussion was several hundred hours of focused work.</li>
+                <li><strong>No commercial support.</strong> uBlock Origin Lite has Raymond Hill's full-time maintainer attention; AdGuard has a paid team; the password managers are commercial products. CAD was an unpaid project with a small contributor base. Sustaining a multi-month rewrite with no funding, while the MV2 version still <em>worked</em> for a few more years, was a hard ask.</li>
+            </ul>
+            <p>The result: as discussed in the project's GitHub issue tracker through 2023 and 2024, the MV3 rewrite was scoped, debated, and ultimately not shipped in time. Existing forks — most notably <code>median-dxz/Cookie-AutoDelete-MV3</code> — published partial MV3 ports but did not pass through the Chrome Web Store review process, leaving the official Web Store listing as the casualty when MV2 was disabled.</p>
+            <div class="callout">
+                <p><strong>The wider pattern.</strong> Of the MV2 extensions disabled in the late-2024 enforcement wave, the survivors broadly fell into two camps: well-funded commercial products and single-purpose extensions whose feature set fit cleanly into <code>declarativeNetRequest</code> rules. Volunteer projects with stateful, event-driven architectures — exactly CAD's shape — were over-represented in the casualties.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Where the 100,000+ users went</h2>
+            <p>CAD's Chrome install base before delisting was widely cited at 100,000+ users (per the Chrome Web Store user-count badges). That cohort didn't disappear — they redistributed across a small set of options. Roughly, in order of where the migration traffic visibly went:</p>
+            <ul class="bullets">
+                <li><strong>Purpose-built MV3 replacements.</strong> A small set of MV3-native cookie cleaners filled the post-CAD vacuum. The closest like-for-like replacement — auto-delete on tab close, whitelist, greylist, cookie aging — is <a href="cookie-autodelete-alternatives.html">Cookie Guardian</a>, which has accumulated an active user base and a Featured-by-Chrome listing since launch. The full landscape comparison lives on the <a href="cookie-autodelete-alternatives.html">alternatives page</a>.</li>
+                <li><strong>Cookiebro.</strong> Pre-existing MV3-compatible extension that picked up a chunk of the CAD diaspora. Stronger on cookie-editor power-user features; weaker on the close-a-tab-and-forget-it default behaviour.</li>
+                <li><strong>Chrome's built-in "clear on exit."</strong> Chrome has a native setting to delete cookies when all browser windows are closed, with a per-site whitelist. For users who fully quit Chrome regularly, this is enough; for users who keep Chrome open for days at a time, it almost never fires.</li>
+                <li><strong>The Firefox migration.</strong> A non-trivial slice of the CAD user base moved to Firefox specifically to keep CAD running. Mozilla retained MV2 support, and CAD's Firefox listing continues to receive updates from the same project.</li>
+                <li><strong>The long tail: nothing.</strong> Some users simply stopped replacing CAD and now live with persistent cookies, accepting the loss. This was visible in subreddit threads through early 2025 — users asking "what should I use instead?" and a smaller fraction explicitly saying they'd given up on a replacement.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>What this means for browser extension trust</h2>
+            <p>Zoom out and CAD's end is a case study in a structural truth about browser extensions: they are tenants on a platform, and platforms re-architect. Users who depended on CAD discovered, in the space of a few weeks in late 2024, that their privacy workflow had a single point of failure they hadn't priced in — the willingness of one volunteer maintainer to re-write the project on the platform's new schedule.</p>
+            <p>That isn't an indictment of CAD or of Chrome. It's a property of the model. A few practical lessons fall out of the transition:</p>
+            <ul class="bullets">
+                <li><strong>Built MV3-native from day one matters.</strong> Extensions designed against the current platform — service workers, declarative rules, modern storage APIs — are structurally less likely to be next on the deprecation list. There will be MV4 eventually, but greenfield MV3 code is closer to wherever the platform goes next than retrofitted MV2 code is.</li>
+                <li><strong>Maintenance posture matters more than feature count.</strong> A simple extension that ships an update every quarter is more reliable than a feature-rich one whose last release was three years ago. When auditing a privacy extension, look at the release cadence first.</li>
+                <li><strong>Open about the dependency footprint.</strong> Cookie tools that explicitly document which Chrome APIs they rely on — and which would force a rewrite if deprecated — are easier to evaluate. Privacy tooling deserves the same supply-chain hygiene that backend infrastructure already has.</li>
+            </ul>
+            <p>None of this changes the verdict for CAD itself, which remains a well-loved and well-built MV2-era project that simply ran out the clock. It does change the questions worth asking about whatever you replace it with.</p>
+        </section>
+
+        <section>
+            <h2>Sources and further reading</h2>
+            <ul class="sources">
+                <li><a href="https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline">Chrome Manifest V3 deprecation timeline (developer.chrome.com)</a> — official Google-published timeline of MV2 sunset stages and dates.</li>
+                <li><a href="https://developer.chrome.com/blog/resuming-the-transition-to-mv3">Resuming the transition to Manifest V3 (Chrome blog)</a> — the announcement that locked in the late-2024 enforcement schedule.</li>
+                <li><a href="https://github.com/Cookie-AutoDelete/Cookie-AutoDelete">Cookie AutoDelete GitHub repo</a> — open-source codebase, last release v3.8.2 (December 2022), MIT-licensed, ~2K stars.</li>
+                <li><a href="https://github.com/median-dxz/Cookie-AutoDelete-MV3">median-dxz/Cookie-AutoDelete-MV3</a> — community fork porting CAD to MV3. Not on the Chrome Web Store.</li>
+                <li><a href="https://www.eff.org/deeplinks/2021/12/chrome-users-beware-manifest-v3-deceitful-and-threatening">Chrome Users Beware: Manifest V3 is Deceitful and Threatening (EFF)</a> — the most-cited critical analysis of MV3's privacy and security tradeoffs.</li>
+                <li><a href="https://www.privacyguides.org/en/desktop-browsers/">Privacy Guides — desktop browsers</a> — vendor-neutral privacy guide that historically recommended Cookie AutoDelete.</li>
+                <li><a href="cookie-autodelete-alternatives.html">Cookie AutoDelete alternatives — 2026 comparison</a> — internal comparison of post-CAD options for Chrome users.</li>
+            </ul>
+        </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="/cookie-guardian/">Home</a>
+                <a href="cookie-autodelete-alternatives.html">CAD alternatives</a>
+                <a href="/cookie-guardian/PRIVACY.html">Privacy Policy</a>
+                <a href="https://github.com/CurlyEthan/cookie-guardian">GitHub</a>
+                <a href="https://chromewebstore.google.com/detail/cookie-guardian-auto-dele/gnoaanpbfnjakaddkecnnamnfkebhgle">Chrome Web Store</a>
+            </div>
+            <p>Privacy without thinking about it.</p>
+        </footer>
+    </div>
+</body>
+</html>
