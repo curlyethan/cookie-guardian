@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie AutoDelete is gone — 2026 alternatives compared | Cookie Guardian</title>
+    <meta name="description" content="Cookie AutoDelete was disabled by Chrome's Manifest V3 enforcement in late 2024. Here are the 2026 alternatives that actually work, compared on features, pricing, and active maintenance. Updated May 2026.">
+    <meta name="keywords" content="cookie autodelete alternative, cookie autodelete replacement, cookie autodelete 2026, manifest v3 cookie extension, cookie auto delete disabled">
+    <meta property="og:title" content="Cookie AutoDelete alternatives — 2026 comparison">
+    <meta property="og:description" content="Disabled extension, six replacements compared. Last updated May 2026.">
+    <meta property="og:url" content="https://curlyethan.github.io/cookie-guardian/cookie-autodelete-alternatives.html">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://curlyethan.github.io/cookie-guardian/icons/icon128.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Cookie AutoDelete alternatives — 2026 comparison">
+    <meta name="twitter:description" content="Disabled extension, six replacements compared. Last updated May 2026.">
+    <meta name="twitter:image" content="https://curlyethan.github.io/cookie-guardian/icons/icon128.png">
+    <link rel="canonical" href="https://curlyethan.github.io/cookie-guardian/cookie-autodelete-alternatives.html">
+    <link rel="icon" type="image/png" href="icons/icon48.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00BFA6;
+            --primary-hover: #00897B;
+            --accent: #FF9100;
+            --accent-hover: #E67E00;
+            --success: #00E676;
+            --bg-dark: #1A1A2E;
+            --bg-card: #16213e;
+            --text: #e4e4e7;
+            --text-muted: #a1a1aa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #0f0f23 100%);
+            min-height: 100vh;
+        }
+
+        a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+            outline: 3px solid #FF9100;
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                transform: none !important;
+            }
+        }
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            background: var(--accent);
+            color: #0a0a15;
+            padding: 12px 20px;
+            font-weight: 700;
+            z-index: 999;
+        }
+        .skip-link:focus { left: 12px; top: 12px; }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .top-nav {
+            margin-bottom: 24px;
+            font-size: 0.9em;
+        }
+        .top-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+        .top-nav a:hover { color: var(--primary); }
+
+        .hero {
+            padding: 40px 0 20px;
+        }
+
+        h1 {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 2.4em;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 18px;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1em;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+
+        .hero-subtitle strong { color: var(--text); }
+        .hero-subtitle a { color: var(--primary); text-decoration: none; }
+        .hero-subtitle a:hover { text-decoration: underline; }
+
+        .updated-stamp {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+        .updated-stamp time { color: var(--primary); }
+
+        section {
+            margin: 48px 0;
+        }
+
+        h2 {
+            font-size: 1.7em;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 26px;
+            background: linear-gradient(to bottom, var(--primary), var(--success));
+            border-radius: 2px;
+        }
+
+        h3 {
+            color: var(--success);
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            margin-top: 24px;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        section p strong { color: var(--text); }
+
+        a { color: var(--primary); }
+
+        /* Comparison table */
+        .table-wrap {
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 191, 166, 0.15);
+            padding: 4px;
+        }
+
+        table.compare {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88em;
+            min-width: 720px;
+        }
+
+        table.compare th, table.compare td {
+            padding: 12px 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(161, 161, 170, 0.12);
+            vertical-align: top;
+        }
+
+        table.compare thead th {
+            color: var(--primary);
+            font-weight: 600;
+            background: rgba(0, 191, 166, 0.06);
+            position: sticky;
+            top: 0;
+        }
+
+        table.compare tbody th {
+            color: var(--text);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        table.compare td {
+            color: var(--text-muted);
+        }
+
+        table.compare tr.highlight {
+            background: rgba(0, 191, 166, 0.04);
+        }
+        table.compare tr.highlight th { color: var(--success); }
+
+        table.compare tr.dead {
+            color: rgba(161, 161, 170, 0.5);
+        }
+        table.compare tr.dead th, table.compare tr.dead td { color: rgba(161, 161, 170, 0.55); }
+
+        .yes { color: var(--success); font-weight: 600; }
+        .no { color: #ef4444; }
+        .partial { color: var(--accent); }
+
+        /* Detail sections */
+        section[aria-labelledby] {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 22px 26px;
+            border-left: 3px solid rgba(0, 191, 166, 0.4);
+            margin: 24px 0;
+        }
+        section[aria-labelledby] h3 { margin-top: 0; }
+
+        section[aria-labelledby="cookie-guardian-detail"] {
+            border-left-color: var(--primary);
+            background: linear-gradient(135deg, rgba(0, 191, 166, 0.06), rgba(74, 222, 128, 0.04));
+        }
+
+        /* FAQ */
+        dl { margin-top: 8px; }
+        dt {
+            color: var(--text);
+            font-weight: 600;
+            font-size: 1.05em;
+            margin-top: 22px;
+            margin-bottom: 6px;
+        }
+        dd {
+            color: var(--text-muted);
+            margin-left: 0;
+            margin-bottom: 8px;
+        }
+
+        /* Migration steps */
+        ol.steps {
+            color: var(--text-muted);
+            padding-left: 22px;
+        }
+        ol.steps li {
+            margin-bottom: 12px;
+            padding-left: 6px;
+        }
+        ol.steps li strong { color: var(--text); }
+
+        /* Sources */
+        ul.sources { list-style: none; padding-left: 0; }
+        ul.sources li {
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            padding-left: 18px;
+            position: relative;
+        }
+        ul.sources li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        ul.sources a { text-decoration: none; }
+        ul.sources a:hover { text-decoration: underline; }
+
+        /* CTA box */
+        .install-cta {
+            background: linear-gradient(135deg, rgba(0, 191, 166, 0.1), rgba(74, 222, 128, 0.1));
+            border: 1px solid rgba(0, 191, 166, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin: 36px 0;
+        }
+        .install-cta a {
+            display: inline-block;
+            background: linear-gradient(135deg, #00BFA6, #00897B);
+            color: #0a0a15;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: 10px;
+            box-shadow: 0 6px 20px rgba(0, 191, 166, 0.4);
+        }
+        .install-cta a:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 28px rgba(0, 191, 166, 0.55);
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(0, 191, 166, 0.2);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 12px; flex-wrap: wrap; }
+        .footer-links a { color: var(--primary); text-decoration: none; }
+        .footer-links a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.7em; letter-spacing: -0.5px; }
+            .hero-subtitle { font-size: 1em; }
+            h2 { font-size: 1.35em; }
+            section[aria-labelledby] { padding: 16px 18px; }
+            table.compare { font-size: 0.82em; }
+            table.compare th, table.compare td { padding: 8px 8px; }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Cookie AutoDelete is gone — your 2026 alternatives, compared",
+        "datePublished": "2026-05-07",
+        "dateModified": "2026-05-07",
+        "author": {"@type": "Person", "name": "Ethan Carlton"},
+        "publisher": {
+            "@type": "Organization",
+            "name": "Cookie Guardian",
+            "logo": {"@type": "ImageObject", "url": "https://curlyethan.github.io/cookie-guardian/icons/icon128.png"}
+        },
+        "image": "https://curlyethan.github.io/cookie-guardian/icons/icon128.png",
+        "mainEntityOfPage": "https://curlyethan.github.io/cookie-guardian/cookie-autodelete-alternatives.html"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Why did Cookie AutoDelete stop working?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Chrome disabled all Manifest V2 extensions in late 2024 when it fully enforced Manifest V3. Cookie AutoDelete's architecture predated MV3 and the maintainer chose not to rewrite the extension for the new platform. Last release was v3.8.2 in December 2022, with maintenance trailing off through 2023."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is there a Cookie AutoDelete replacement that actually works in 2026?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes — several. Cookie Guardian is the closest like-for-like, built specifically for MV3. See the comparison table above for alternatives."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What's the difference between Cookie Guardian and Cookie AutoDelete?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Same core behaviour: cookies auto-delete when you close a tab, with a whitelist for sites you trust. Cookie Guardian adds cookie aging (auto-delete cookies older than X hours), scheduled cleanup, a 7-day greylist, alphabetical whitelist sorting, and a Featured-by-Chrome listing. It's not open source like CAD was, but it's actively maintained and uses zero servers."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is Cookie Guardian open source?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No, Cookie Guardian is proprietary. The trade-off is that it's actively maintained and Featured by Chrome. Code review is available on request."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does Cookie Guardian work in Brave / Edge / Opera / Vivaldi?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes — it works in any Chromium-based browser that supports Chrome Web Store extensions. Confirmed working on Chrome, Brave, Edge, Opera, and Vivaldi."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I migrate my Cookie AutoDelete whitelist to a new extension?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "CAD's whitelist export was a JSON file. Cookie Guardian doesn't yet import that format directly (planned for v2.1) — for now, copy domains manually from your CAD export into Cookie Guardian's settings. Most users have under 20 whitelisted sites; takes about three minutes."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Why does Cookie Guardian charge for premium?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The free tier is fully functional for cookies. Premium ($3.49 one-time, no subscription) adds localStorage / IndexedDB / cache cleaning and unlimited whitelist slots. The fee covers ongoing maintenance — no servers, no recurring costs, no data collection."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div class="container">
+        <nav class="top-nav"><a href="/cookie-guardian/">← Cookie Guardian home</a></nav>
+
+        <main id="main">
+        <header class="hero">
+            <h1>Cookie AutoDelete is gone — your 2026 alternatives, compared</h1>
+            <p class="hero-subtitle"><strong>TL;DR.</strong> Chrome disabled Cookie AutoDelete in late 2024 when it enforced Manifest V3. Of the alternatives still standing in 2026, <a href="/cookie-guardian/">Cookie Guardian</a> is the only one purpose-built for MV3 with active maintenance, an alphabetical whitelist, and a one-time-fee free-tier model. Below: the full comparison + a 5-minute migration guide.</p>
+            <p class="updated-stamp"><time datetime="2026-05-07">Last updated: 7 May 2026</time></p>
+        </header>
+
+        <section>
+            <h2>Comparison table</h2>
+            <p>Six options compared on the things that matter when you're rebuilding the cookie-auto-delete workflow. Numbers verified against Chrome Web Store listings and chrome-stats.com on 7 May 2026.</p>
+            <div class="table-wrap" style="overflow-x:auto">
+                <table class="compare">
+                    <thead>
+                        <tr>
+                            <th scope="col">Extension</th>
+                            <th scope="col">MV3 native</th>
+                            <th scope="col">Active in 2026</th>
+                            <th scope="col">CWS users</th>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Last update</th>
+                            <th scope="col">Whitelist</th>
+                            <th scope="col">Greylist (temp)</th>
+                            <th scope="col">Cookie aging</th>
+                            <th scope="col">Pricing</th>
+                            <th scope="col">Open source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="dead">
+                            <th scope="row">Cookie AutoDelete</th>
+                            <td><span class="no">No</span> (MV2)</td>
+                            <td><span class="no">No</span> — disabled by Chrome</td>
+                            <td>— (delisted)</td>
+                            <td>—</td>
+                            <td>Dec 2022</td>
+                            <td>Yes</td>
+                            <td>Yes</td>
+                            <td>No</td>
+                            <td>Free</td>
+                            <td>Yes (MIT)</td>
+                        </tr>
+                        <tr class="highlight">
+                            <th scope="row">Cookie Guardian</th>
+                            <td><span class="yes">Yes</span></td>
+                            <td><span class="yes">Yes</span></td>
+                            <td>8,247</td>
+                            <td>4.34 (53)</td>
+                            <td>May 2026</td>
+                            <td>Yes (alpha-sorted)</td>
+                            <td>Yes (7-day expiry)</td>
+                            <td>Yes (1–720h)</td>
+                            <td>Free + $3.49 one-time</td>
+                            <td>No (proprietary)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Cookiebro</th>
+                            <td><span class="yes">Yes</span></td>
+                            <td><span class="yes">Yes</span></td>
+                            <td>~22K (Chrome + Edge)</td>
+                            <td>Unknown — see chrome-stats</td>
+                            <td>v2.18.0 (2025)</td>
+                            <td>Yes</td>
+                            <td>No</td>
+                            <td>No</td>
+                            <td>Free</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="dead">
+                            <th scope="row">Self-Destructing Cookies</th>
+                            <td>—</td>
+                            <td>Firefox only — no CWS listing</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>v0.2.3 (Jan 2026, Firefox)</td>
+                            <td>No (whitelist-via-prefs only)</td>
+                            <td>No</td>
+                            <td>No</td>
+                            <td>Free</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr class="dead">
+                            <th scope="row">Forget Me Not (Lusito)</th>
+                            <td>Unknown</td>
+                            <td>Repo archived May 2024 — not actively maintained</td>
+                            <td>Unknown (low)</td>
+                            <td>Unknown</td>
+                            <td>2024 (archived)</td>
+                            <td>Yes</td>
+                            <td>Yes (greylist)</td>
+                            <td>No</td>
+                            <td>Free</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Chrome built-in "Clear on exit"</th>
+                            <td>n/a (browser feature)</td>
+                            <td><span class="yes">Yes</span></td>
+                            <td>n/a</td>
+                            <td>n/a</td>
+                            <td>Bundled with Chrome</td>
+                            <td>Yes (whole-browser, not per-tab)</td>
+                            <td>No</td>
+                            <td>No</td>
+                            <td>Free</td>
+                            <td>n/a</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size:0.85em; margin-top:14px;"><em>Where a value couldn't be verified independently we marked "Unknown" rather than guess. Numbers will drift — if you spot one that's stale, please <a href="https://github.com/ethancarlton-cyber/cookie-guardian/issues">open an issue</a>.</em></p>
+        </section>
+
+        <section aria-labelledby="cookie-guardian-detail">
+            <h3 id="cookie-guardian-detail">Cookie Guardian</h3>
+            <p>Built ground-up for Manifest V3 in late 2025, Cookie Guardian is the closest like-for-like replacement for Cookie AutoDelete's tab-close-and-clean workflow. Featured by Chrome Web Store, with <strong>8,247 users and ★4.34 from 53 reviews (May 2026)</strong>.</p>
+            <p>Core feature set: whitelist (10 free, 15 with review bonus, unlimited premium) + greylist (7-day expiry) + cookie aging + scheduled cleanup, plus a deletion log and per-day stats. Free tier covers all cookie functionality — auto-delete on tab close, whitelist, greylist, aging, scheduled cleanup, logs. Premium $3.49 one-time — adds localStorage / IndexedDB / cache cleaning on top of cookies, plus unlimited whitelist slots. No subscription, no recurring fee.</p>
+            <p>Privacy posture matches the original CAD ethos: zero analytics, zero servers, zero data collection. Everything runs locally; the extension never phones home. Honest tradeoff: not open source (proprietary) — the maintenance commitment is real but you can't audit the code yourself. For users who value the audit-the-source model, Cookie AutoDelete's GitHub repo is still readable even if the extension itself no longer runs.</p>
+            <div class="install-cta">
+                <p style="margin:0; color:var(--text);"><strong>Install Cookie Guardian</strong> — free, no account required.</p>
+                <a href="https://chromewebstore.google.com/detail/cookie-guardian-auto-dele/gnoaanpbfnjakaddkecnnamnfkebhgle">Add to Chrome</a>
+            </div>
+        </section>
+
+        <section aria-labelledby="cad-detail">
+            <h3 id="cad-detail">Cookie AutoDelete (the disabled predecessor)</h3>
+            <p>Cookie AutoDelete (CAD) was the de-facto "delete cookies on tab close" extension for nearly a decade, with a 100,000+ user base on Chrome and a sister listing on Firefox. Its last shipped Chrome release was v3.8.2 in December 2022, with maintenance trailing off through 2023 (the last working build for many users).</p>
+            <p>The end came when Chrome enforced Manifest V3 in late 2024 and disabled all remaining MV2 extensions in waves. CAD's architecture was MV2-era and a one-person volunteer effort; the MV3 rewrite never shipped (tracked as GitHub issue #1634). Existing CAD users found the extension greyed-out in their Chrome toolbar with a "no longer supported" notice, and it was eventually delisted from the Web Store.</p>
+            <p>The repo is still online (MIT-licensed, archived state) and a community fork — <code>median-dxz/Cookie-AutoDelete-MV3</code> — has shipped early MV3 builds, but it isn't on the Chrome Web Store as of May 2026 and has a much smaller install base.</p>
+        </section>
+
+        <section aria-labelledby="cookiebro-detail">
+            <h3 id="cookiebro-detail">Cookiebro</h3>
+            <p>Cookiebro by Nodetics is the most-maintained alternative outside of Cookie Guardian — it's MV3-native and has continued to ship updates through 2025 (current v2.18.0). Combined Chrome + Edge install base sits around 22K. Its strength is a deep whitelist UI with import/export, plus a built-in cookie editor for power users who want to inspect or modify cookies directly.</p>
+            <p>Where it differs from CAD: Cookiebro's deletion model is more "clear-on-rule" than "clear-on-tab-close," so the close-a-tab-and-cookies-are-gone reflex isn't the default behaviour. Some reviewers report whitelist edge cases where cookies persist for non-whitelisted domains. No greylist, no cookie aging.</p>
+        </section>
+
+        <section aria-labelledby="sdc-detail">
+            <h3 id="sdc-detail">Self-Destructing Cookies</h3>
+            <p>The original Self-Destructing Cookies extension predates the WebExtensions era and was Firefox-only. A modern fork — Self-Destructing Cookies (WebEx) — keeps the concept alive on Firefox 57+, with the latest version (v0.2.3) updated January 2026. There's no Chrome Web Store listing for either version, so this is not a usable Chrome alternative.</p>
+            <p>Mentioned here for completeness because it's frequently suggested in privacy forums — the answer for Chrome users asking "what about SDC?" is simply: it doesn't exist on Chrome.</p>
+        </section>
+
+        <section aria-labelledby="fmn-detail">
+            <h3 id="fmn-detail">Forget Me Not (Lusito)</h3>
+            <p>Forget Me Not by Lusito offered a strong feature parity with Cookie AutoDelete on Firefox (whitelist, greylist, blacklist, redlist, plus localStorage and IndexedDB cleanup) and shipped a Chrome counterpart for a while. The repository was <strong>archived by the author on 30 May 2024</strong>, signalling the project is no longer maintained. The Chrome listing's user count is low and we couldn't independently verify its current status against MV3.</p>
+            <p>Best treated as a Firefox-historical option. If you're on Firefox today, Cookie AutoDelete itself still works there (Firefox kept MV2 support); on Chrome, look at Cookie Guardian or Cookiebro instead.</p>
+        </section>
+
+        <section aria-labelledby="builtin-detail">
+            <h3 id="builtin-detail">Chrome built-in "Clear cookies on exit"</h3>
+            <p>Chrome has a native setting under <em>Settings → Privacy and security → Cookies and other site data → Clear cookies and site data when you close all windows</em>. Free, no extension required, and it works.</p>
+            <p>Limitations vs an extension: it only triggers when you close every Chrome window, not on a per-tab basis — so in practice it almost never runs for users who keep Chrome open all day. There's a sub-list to whitelist sites that should keep cookies, but no greylist, no cookie aging, no scheduled cleanup, and no log of what was deleted. For a "set-and-forget if I always quit Chrome" user it's enough; for the CAD workflow it isn't.</p>
+        </section>
+
+        <section aria-labelledby="faq-heading">
+            <h2 id="faq-heading">Frequently asked questions</h2>
+            <dl>
+                <dt>Why did Cookie AutoDelete stop working?</dt>
+                <dd>Chrome disabled all Manifest V2 extensions in late 2024 when it fully enforced Manifest V3. Cookie AutoDelete's architecture predated MV3 and the maintainer chose not to rewrite the extension for the new platform. Last release was v3.8.2 in December 2022, with maintenance trailing off through 2023.</dd>
+
+                <dt>Is there a Cookie AutoDelete replacement that actually works in 2026?</dt>
+                <dd>Yes — several. Cookie Guardian is the closest like-for-like, built specifically for MV3. See the comparison table above for alternatives.</dd>
+
+                <dt>What's the difference between Cookie Guardian and Cookie AutoDelete?</dt>
+                <dd>Same core behaviour: cookies auto-delete when you close a tab, with a whitelist for sites you trust. Cookie Guardian adds cookie aging (auto-delete cookies older than X hours), scheduled cleanup, a 7-day greylist, alphabetical whitelist sorting, and a Featured-by-Chrome listing. It's not open source like CAD was, but it's actively maintained and uses zero servers.</dd>
+
+                <dt>Is Cookie Guardian open source?</dt>
+                <dd>No, Cookie Guardian is proprietary. The trade-off is that it's actively maintained and Featured by Chrome. Code review is available on request.</dd>
+
+                <dt>Does Cookie Guardian work in Brave / Edge / Opera / Vivaldi?</dt>
+                <dd>Yes — it works in any Chromium-based browser that supports Chrome Web Store extensions. Confirmed working on Chrome, Brave, Edge, Opera, and Vivaldi.</dd>
+
+                <dt>How do I migrate my Cookie AutoDelete whitelist to a new extension?</dt>
+                <dd>CAD's whitelist export was a JSON file. Cookie Guardian doesn't yet import that format directly (planned for v2.1) — for now, copy domains manually from your CAD export into Cookie Guardian's settings. Most users have under 20 whitelisted sites; takes about three minutes.</dd>
+
+                <dt>Why does Cookie Guardian charge for premium?</dt>
+                <dd>The free tier is fully functional for cookies. Premium ($3.49 one-time, no subscription) adds localStorage / IndexedDB / cache cleaning and unlimited whitelist slots. The fee covers ongoing maintenance — no servers, no recurring costs, no data collection.</dd>
+            </dl>
+        </section>
+
+        <section aria-labelledby="migration-heading">
+            <h2 id="migration-heading">5-minute migration guide</h2>
+            <p>If you were running Cookie AutoDelete and want the same workflow back, this is the fastest path:</p>
+            <ol class="steps">
+                <li><strong>Install Cookie Guardian.</strong> Open the <a href="https://chromewebstore.google.com/detail/cookie-guardian-auto-dele/gnoaanpbfnjakaddkecnnamnfkebhgle">Chrome Web Store listing</a> and click <em>Add to Chrome</em>. Pin the icon in your toolbar.</li>
+                <li><strong>Pull your old whitelist.</strong> Open your last CAD export JSON (or just look at your old whitelist screenshots if you didn't export). Most users have 5–20 entries — banks, email, social, work tools.</li>
+                <li><strong>Recreate the whitelist.</strong> Open Cookie Guardian's options page, click into <em>Whitelist</em>, and add each domain. Or right-click any open tab and choose <em>Add to whitelist</em> as you visit them. Free tier holds 10 (15 with the review bonus); premium is unlimited.</li>
+                <li><strong>Toggle auto-delete on.</strong> In options, confirm <em>Auto-delete on tab close</em> is enabled (it is by default). Optionally turn on <em>Scheduled cleanup</em> for an extra sweep every 30–60 minutes.</li>
+                <li><strong>Optional: cookie aging.</strong> If you want CAD-style aggressive cleanup, set <em>Cookie aging</em> to delete cookies older than 24 hours (or whatever value matches your habits — the slider goes 1–720h).</li>
+            </ol>
+            <p>Total time: about three minutes for the whitelist, one click for the rest. Your old CAD log won't carry over but Cookie Guardian's deletion log starts populating immediately.</p>
+        </section>
+
+        <section aria-labelledby="sources-heading">
+            <h2 id="sources-heading">Sources &amp; further reading</h2>
+            <ul class="sources">
+                <li><a href="https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline">Chrome Manifest V3 deprecation timeline (developer.chrome.com)</a> — official Google announcement of the MV2 sunset schedule.</li>
+                <li><a href="https://developer.chrome.com/blog/resuming-the-transition-to-mv3">Resuming the transition to Manifest V3 (Chrome blog)</a> — the announcement that triggered the late-2024 enforcement wave.</li>
+                <li><a href="https://github.com/Cookie-AutoDelete/Cookie-AutoDelete">Cookie AutoDelete GitHub repo</a> — open-source codebase, last release v3.8.2 (December 2022).</li>
+                <li><a href="https://github.com/Cookie-AutoDelete/Cookie-AutoDelete/issues/1634">CAD GitHub issue #1634 — MV3 migration request</a> — the open ticket that never shipped.</li>
+                <li><a href="https://chromewebstore.google.com/detail/cookie-guardian-auto-dele/gnoaanpbfnjakaddkecnnamnfkebhgle">Cookie Guardian on the Chrome Web Store</a> — live listing, current install / rating numbers.</li>
+                <li><a href="https://chrome-stats.com/d/lpmockibcakojclnfmhchibmdpmollgn">Cookiebro on chrome-stats.com</a> — third-party stats mirror used to verify Cookiebro's user count.</li>
+                <li><a href="https://www.privacyguides.org/en/desktop-browsers/">Privacy Guides — desktop browsers section</a> — vendor-neutral writeup on browser privacy hardening that historically recommended CAD.</li>
+            </ul>
+        </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="/cookie-guardian/">Home</a>
+                <a href="/cookie-guardian/PRIVACY.html">Privacy Policy</a>
+                <a href="https://github.com/CurlyEthan/cookie-guardian">GitHub</a>
+                <a href="https://chromewebstore.google.com/detail/cookie-guardian-auto-dele/gnoaanpbfnjakaddkecnnamnfkebhgle">Chrome Web Store</a>
+            </div>
+            <p>Cookie Guardian — Privacy without thinking about it.</p>
+        </footer>
+    </div>
+</body>
+</html>
