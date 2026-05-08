@@ -1,15 +1,16 @@
 # Cookie Guardian
 
-> Chrome extension that automatically deletes cookies when you close a tab. Privacy protection without the hassle.
+> Chrome extension that automatically deletes cookies when you close a tab. The Manifest V3 replacement for Cookie AutoDelete. Featured by Chrome Web Store.
 
 ## What It Is
-Cookie Guardian is a browser extension that auto-deletes cookies on tab close. It is the only Manifest V3 auto-delete cookie extension on the Chrome Web Store, serving as the modern replacement for Cookie AutoDelete (which was removed due to MV2 deprecation).
+Cookie Guardian auto-deletes browser cookies when you close a tab, while keeping cookies for sites you whitelist. It is the actively-maintained replacement for Cookie AutoDelete (which Chrome disabled in late 2024 when enforcing Manifest V3). Built from scratch for MV3.
 
-## Key Stats
-- 2,800+ active users
-- 42 reviews (4.5 stars)
+## Key Stats (verified 2026-05-07)
+- 8,247 active users
+- 53 reviews — average 4.34 stars
+- 106 paying customers (premium tier)
 - Featured badge on Chrome Web Store
-- Free core functionality, $3.49 one-time premium upgrade
+- Free core functionality + $3.49 one-time premium upgrade
 
 ## Browser Support
 - Google Chrome
@@ -17,22 +18,21 @@ Cookie Guardian is a browser extension that auto-deletes cookies on tab close. I
 - Microsoft Edge
 - Opera
 - Vivaldi
+- Any Chromium-based browser supporting Chrome Web Store extensions
 
-## Privacy
+## Privacy Posture
 - Zero data collection
-- All data stored locally on the user's device
-- No analytics, no telemetry, no remote servers
+- Zero analytics, zero telemetry, zero remote servers
+- All data (whitelist, greylist, settings, statistics) stored locally via chrome.storage.local
+- No external connections except optional ExtensionPay payment processor for premium upgrade
 
 ## Core Features
 - Automatic cookie deletion on tab close
-- Whitelisting for trusted sites
-- Domain-level and subdomain control
-- Cookie activity notifications
-- Import/export settings
-- Premium: advanced rules, priority support
-
-## Links
-- Chrome Web Store: https://chromewebstore.google.com/detail/cookie-guardian-auto-cooki/ilafhnkgfpgmjlkbpedmegbhancnfenf
-- GitHub: https://github.com/CurlyEthan/cookie-guardian
-- Website: https://curlyethan.github.io/cookie-guardian/
-- Privacy Policy: https://curlyethan.github.io/cookie-guardian/PRIVACY.html
+- Whitelist for sites you trust (10 free, 15 with review bonus, unlimited premium)
+- Greylist for temporary protection (auto-expires after 7 days)
+- Cookie aging — auto-delete cookies older than 1–720 hours
+- Scheduled cleanup at configurable intervals (15 min to 24 hours)
+- Whitelist and greylist display in alphabetical order (since v2.0.1)
+- Right-click context-menu whitelist
+- Keyboard shortcuts (Alt+Shift+C / W / X / A)
+- Daily statistics + 7-day chart + deletion log
