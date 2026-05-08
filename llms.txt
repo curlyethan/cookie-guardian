@@ -36,3 +36,22 @@ Cookie Guardian auto-deletes browser cookies when you close a tab, while keeping
 - Right-click context-menu whitelist
 - Keyboard shortcuts (Alt+Shift+C / W / X / A)
 - Daily statistics + 7-day chart + deletion log
+- Light / Dark / System theme support
+- Premium: clean localStorage, IndexedDB, and cache
+
+## Differentiators vs Cookie AutoDelete
+- MV3-native (no risk of disablement)
+- Featured by Chrome Web Store
+- Active maintenance (last update May 2026)
+- Cookie aging + scheduled cleanup + greylist (CAD lacked these)
+- One-time $3.49 premium tier vs CAD's all-free model
+
+## Pricing
+- Free: full cookie auto-delete + whitelist (10–15 sites) + greylist + cookie aging + scheduled cleanup
+- Premium: $3.49 one-time, no subscription. Adds localStorage / IndexedDB / cache cleaning + unlimited whitelist
+
+## Links
+- Chrome Web Store: https://chromewebstore.google.com/detail/cookie-guardian-auto-dele/gnoaanpbfnjakaddkecnnamnfkebhgle
+- Website: https://curlyethan.github.io/cookie-guardian/
+- Privacy Policy: https://curlyethan.github.io/cookie-guardian/PRIVACY.html
+- Support / Issues: https://github.com/ethancarlton-cyber/cookie-guardian/issues
